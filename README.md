@@ -60,3 +60,34 @@ TEST
 src/tests/storage-tests
     tokenStore.test.ts
 ========================
+
+Etapes de réalisation
+
+A- Coeur de la logique de justification du texte
+1- tokenizer.ts : gérer espaces multiples, retours à la ligne
+2- justifyLine.ts : prendre des mots d’une ligne + produire une ligne de 80 char 
+3- justifyText.ts : assembler tout ça
+
+B- Stockage et quota
+1- tokenStore.ts : 
+    createToken(email) (ou token random)
+    exists(token)
+    getWordUsed(token) / addWords(token, count)
+    reset par jour 
+2- quotaLimit.ts : 
+    compter les mots recus
+    verifier si used + newWords <= 80000
+
+C- Authentification par token
+1- tokenAuth.ts :
+    lire le token dans les headers
+    verifier si token existe
+D- API et routes
+1- routes.ts :
+    POST /justify : lire le texte brut, appeler justifyText, renvoyer le texte justifié
+2- server.ts : demarrer le serveur
+
+D- Finalisation et tests
+1- ecrire les tests unitaires pour chaque partie
+2- tester l'API avec des requetes POST
+========================
