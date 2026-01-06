@@ -1,8 +1,8 @@
 {
   "name": "tictactrip",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "API de justification de texte",
+  "main": "src/app.ts",
   "scripts": {
     "dev": "ts-node src/app.ts",
     "start": "ts-node src/app.ts",
