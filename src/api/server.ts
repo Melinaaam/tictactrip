@@ -1,3 +1,7 @@
+/*
+    Configure et démarre le serveur Express
+*/
+
 import express from 'express';
 import router from './routes';
 

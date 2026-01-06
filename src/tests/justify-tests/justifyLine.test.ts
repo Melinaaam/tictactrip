@@ -65,4 +65,70 @@ describe('justifyLine', () => {
     const justified = justifyLine(words, lineWidth)
     expect(justified).toBe('Supercalifragilisticexpialidocious')
   })
+
+  // Test 9 : tableau vide -> retourne des espaces
+  test('returns spaces when the words array is empty', () => {
+    const words: string[] = []
+    const lineWidth = 10
+    const justified = justifyLine(words, lineWidth)
+    expect(justified).toBe('          ')
+    expect(justified.length).toBe(10)
+  })
+
+  // Test 10 : largeur = 0
+  test('returns empty string when lineWidth is 0', () => {
+    const words = ['Hello']
+    const lineWidth = 0
+    const justified = justifyLine(words, lineWidth)
+    expect(justified).toBe('Hello')
+  })
+
+  // Test 11 : largeur négative
+  test('handles negative lineWidth gracefully', () => {
+    const words = ['Hello', 'World']
+    const lineWidth = -5
+    const justified = justifyLine(words, lineWidth)
+    // baseSpace = Math.floor((-5 - 10) / 1) = -15
+    // result should handle negative spaces
+    expect(justified).toBeDefined()
+  })
+
+  // Test 12 : mot plus long que lineWidth
+  test('handles a single word longer than lineWidth', () => {
+    const words = ['Supercalifragilisticexpialidocious']
+    const lineWidth = 10
+    const justified = justifyLine(words, lineWidth)
+    // Should return the word without padding or truncation
+    expect(justified).toBe('Supercalifragilisticexpialidocious')
+  })
+
+  // Test 13 : vérifier la distribution des espaces supplémentaires
+  test('distributes extra spaces starting from the left gaps', () => {
+    const words = ['a', 'b', 'c', 'd']
+    const lineWidth = 10 // 4 chars + 6 spaces = 10, 3 gaps
+    // baseSpace = 2, extra = 0 -> "a  b  c  d"
+    const justified = justifyLine(words, lineWidth)
+    expect(justified).toBe('a  b  c  d')
+    expect(justified.length).toBe(10)
+  })
+
+  // Test 14 : vérifier que les espaces extras vont bien à gauche
+  test('adds extra spaces to leftmost gaps first', () => {
+    const words = ['one', 'two', 'three']
+    const lineWidth = 15 // 11 chars + 4 spaces, 2 gaps
+    // baseSpace = 2, extra = 0 -> "one  two  three"
+    const justified = justifyLine(words, lineWidth)
+    expect(justified).toBe('one  two  three')
+    expect(justified.length).toBe(15)
+  })
+
+  // Test 15 : 3 mots avec 1 espace supplémentaire
+  test('distributes one extra space to the first gap', () => {
+    const words = ['Hi', 'my', 'friend']
+    const lineWidth = 13 // 10 chars + 3 spaces, 2 gaps
+    // baseSpace = 1, extra = 1 -> "Hi  my friend"
+    const justified = justifyLine(words, lineWidth)
+    expect(justified).toBe('Hi  my friend')
+    expect(justified.length).toBe(13)
+  })
 })

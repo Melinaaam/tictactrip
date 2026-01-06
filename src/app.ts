@@ -1,22 +1,16 @@
-// app qui lance le serveur
 import express from 'express';
 import bodyParser from 'body-parser';
-import tokenAuth from './middleware/tokenAuth';
-import quotaLimit from './middleware/quotaLimit';
+import apiRoutes from './api/routes';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware pour parser le corps des requêtes en JSON
 app.use(bodyParser.json());
 
-// Middleware d'authentification par token
-app.use(tokenAuth);
+app.use('/api/justify', express.text({ type: 'text/plain' }));
 
-// Middleware de gestion du quota
-app.use(quotaLimit);
+app.use('/api', apiRoutes);
 
-// Démarrage du serveur
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

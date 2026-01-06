@@ -1,13 +1,7 @@
 /*
     Entrée : requête HTTP avec header Authorization
     Sortie : si token valide, appel de next(), sinon réponse 401 Unauthorized
-    
 */
-// Cas à couvrir :
-// pas de header Authorization → 401
-// header présent mais mauvais format (pas Bearer xxx) → 401
-// token inconnu → 401
-// token valide → next() appelé
 
 import * as tokenStore from '../storage/tokenStore'
 
@@ -28,6 +22,6 @@ export default function tokenAuth(req: any, res: any, next: any) {
   if (!tokenStore.has(token)) {
     return res.status(401).send('Unauthorized')
   }
-
+(req as any).token = token;
   return next()
 }
