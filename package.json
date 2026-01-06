@@ -2,10 +2,11 @@
   "name": "tictactrip",
   "version": "1.0.0",
   "description": "API de justification de texte",
-  "main": "src/app.ts",
+  "main": "dist/app.js",
   "scripts": {
     "dev": "ts-node src/app.ts",
-    "start": "ts-node src/app.ts",
+    "build": "tsc",
+    "start": "node dist/app.js",
     "test": "jest"
   },
   "keywords": [],
@@ -24,6 +25,7 @@
     "jest": "^30.2.0",
     "supertest": "^7.1.4",
     "ts-jest": "^29.4.6",
+    "typescript": "^5.7.3",
     "ts-node": "^10.9.2"
   }
 }
