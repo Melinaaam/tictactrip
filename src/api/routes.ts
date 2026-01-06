@@ -13,6 +13,17 @@ import { add as addToken } from '../storage/tokenStore';
 
 const router = Router();
 
+router.get('/', (req: Request, res: Response) => {
+  res.json({
+    message: 'API de Justification de Texte - TictacTrip',
+    endpoints: {
+      'POST /api/token': 'Générer un token d\'authentification',
+      'POST /api/justify': 'Justifier un texte à 80 caractères par ligne'
+    },
+    documentation: 'https://github.com/Melinaann/tictactrip'
+  });
+});
+
 router.post('/token', (req: Request, res: Response) => {
   const { email } = req.body ?? {};
 
